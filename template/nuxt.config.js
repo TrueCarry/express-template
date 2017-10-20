@@ -21,7 +21,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios'],
+    vendor: ['axios', 'vue-i18n'],
     /*
     ** Run ESLINT on save
     */
@@ -35,5 +35,14 @@ module.exports = {
         })
       }
     }
+  },
+
+  plugins: [
+    // Will inject the plugin in the $root app and also in the context as `i18n`
+    { src: '~/plugins/i18n.js', injectAs: 'i18n' }
+  ],
+
+  router: {
+    middleware: ['ssr-cookie', 'i18n']
   }
 }
